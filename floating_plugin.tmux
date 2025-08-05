@@ -7,6 +7,7 @@ default_floating_scratch_term="M-i"
 default_floating_scratch_to_active_win="M-h"
 default_floating_scratch_to_win="M-l"
 default_floating_active_pane_to_scratch="M-m"
+default_floating_pane_rate="70"
 
 set_floating_scratch_term_binding() {
 	local key_bindings="$(get_tmux_option "@floating_scratch_term" "$default_floating_scratch_term")"
@@ -48,11 +49,12 @@ set_floating_scratch_to_active_win() {
 
 set_floating_active_pane_to_scratch() {
 	local key_bindings="$(get_tmux_option "@floating_active_pane_to_scratch" "$default_floating_active_pane_to_scratch")"
+	local floating_rate="$(get_tmux_option "@floating_pane_rate" "$default_floating_pane_rate")"
 	local key
 	for key in $key_bindings; do
 		tmux bind "$key" "if-shell -F '#{==:#S,floating}' {
 		 select-pane -m 
-		 popup -d '#{pane_current_path}' -xC -yC -w70% -h70% -E 'tmux new -A -s floating tmux join-pane'
+		 popup -d '#{pane_current_path}' -xC -yC -w${floating_rate}% -h${floating_rate}% -E 'tmux new -A -s floating tmux join-pane'
 	 }"
 	done
 }
