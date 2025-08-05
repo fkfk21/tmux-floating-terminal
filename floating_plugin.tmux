@@ -18,8 +18,7 @@ set_floating_scratch_term_binding() {
 				detach-client 
 			} {
 			set -gF '@last_session_name' '#S'
-			setenv -F FLOATING_SESSION_NAME 'floating'
-			popup -d '#{pane_current_path}' -xC -yC -w${floating_rate}% -h${floating_rate}% -E 'tmux new -A -s $FLOATING_SESSION_NAME'
+			popup -d '#{pane_current_path}' -xC -yC -w${floating_rate}% -h${floating_rate}% -E 'tmux new -A -s floating'
 		}"
 	done
 }
