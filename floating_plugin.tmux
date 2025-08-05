@@ -11,6 +11,7 @@ default_floating_pane_rate="70"
 
 set_floating_scratch_term_binding() {
 	local key_bindings="$(get_tmux_option "@floating_scratch_term" "$default_floating_scratch_term")"
+	local floating_rate="$(get_tmux_option "@floating_pane_rate" "$default_floating_pane_rate")"
 	local key
 	for key in $key_bindings; do
 			tmux bind-key "$key" "if-shell -F '#{==:#S,floating}' { 
